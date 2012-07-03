@@ -1,0 +1,8 @@
+FilterExpression="FirstName LIKE '{0}%' and SecondName LIKE '{1}%' and ((DateOfBirth>='{2}' and DateOfBirth<='{3}') or DateOfBirth=' ')"
+            OnFiltering="odsAllStudents_Filtering">
+            <filterparameters>
+                <asp:FormParameter name="FirstName"  FormField="txtFilterByFirstName" DefaultValue="*"/>
+                <asp:FormParameter Name="SecondName" FormField="txtFilterBySecondName" DefaultValue="*"/>
+                <asp:FormParameter Name="DateOfBirthFrom" FormField="txtFilterByDateOfBirthFrom" DefaultValue="0" />
+                <asp:FormParameter Name="DateOfBirthTo" FormField="txtFilterByDateOfBirthTo" DefaultValue="9999999999" />
+            </filterparameters>

@@ -1,0 +1,5 @@
+{"StudentID":1,"FirstName":"Andrey","SecondName":"Kirillov","DateOfBirth":"12.12.12","Foto":""}
+{"StudentID":2,"FirstName":"Vitya","SecondName":"Pavlov","DateOfBirth":"12.12.12","Foto":""}
+{"StudentID":3,"FirstName":"Vitya","SecondName":"Pavlov","DateOfBirth":"12.12.12","Foto":""}
+{"StudentID":4,"FirstName":"boks","SecondName":"bbb","DateOfBirth":"12.12.12","Foto":""}
+{"StudentID":5,"FirstName":"sdfgsf","SecondName":"sfsf","DateOfBirth":"2322","Foto":"\Foto\5.jpg"}

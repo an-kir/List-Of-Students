@@ -1,0 +1,6 @@
+E:\программирование\учебное\Train\Students\Students\bin\Students.dll
+E:\программирование\учебное\Train\Students\Students\bin\Students.pdb
+E:\программирование\учебное\Train\Students\Students\obj\Debug\ResolveAssemblyReference.cache
+E:\программирование\учебное\Train\Students\Students\obj\Debug\Students.dll
+E:\программирование\учебное\Train\Students\Students\obj\Debug\Students.pdb
+E:\программирование\учебное\Train\Students\Students\bin\itextsharp.dll

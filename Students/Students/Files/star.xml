@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<StudentList>
+  <student studentID="1">
+    <FirstName>Andrey</FirstName>
+    <SecondName>Kirillov</SecondName>
+    <DateOfBirth>12.12.12</DateOfBirth>
+    <Foto>Foto\1.jpg</Foto>
+  </student>
+  <student studentID="2">
+    <FirstName>Andrey</FirstName>
+    <SecondName>Kirillov</SecondName>
+    <DateOfBirth>12.12.12</DateOfBirth>
+    <Foto>Foto\1.jpg</Foto>
+  </student>
+  <student studentID="3">
+    <FirstName>Andrey</FirstName>
+    <SecondName>Kirillov</SecondName>
+    <DateOfBirth>12.12.12</DateOfBirth>
+    <Foto>Foto\1.jpg</Foto>
+  </student>
+  <student studentID="4">
+    <FirstName>Andrey</FirstName>
+    <SecondName>Kirillov</SecondName>
+    <DateOfBirth>12.12.12</DateOfBirth>
+    <Foto>Foto\1.jpg</Foto>
+  </student>
+  <student studentID="5">
+    <FirstName>витя</FirstName>
+    <SecondName>физруков</SecondName>
+    <DateOfBirth>12.12.12</DateOfBirth>
+    <Foto>Foto\2.jpg</Foto>
+  </student>
+</StudentList>

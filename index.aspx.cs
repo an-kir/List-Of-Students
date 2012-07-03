@@ -9,7 +9,6 @@ using System.Web.Configuration;
 using System.Data;
 using System.IO;
 using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
 using System.Xml.Linq;
 using System.Text;
 using iTextSharp.text;
@@ -30,8 +29,8 @@ namespace Students
             switch (typeOfDB.ToUpper())
             {
                 case "SQL":
-                    odsAllStudents.TypeName = "Students.StudentDB";
-                    odsGetOneStudent.TypeName = "Students.StudentDB";
+                    odsAllStudents.TypeName = "Students.SqlStudentDB";
+                    odsGetOneStudent.TypeName = "Students.SqlStudentDB";
                     break;
                 case "XML":
                     odsAllStudents.TypeName = "Students.XmlStudentDB";
@@ -42,8 +41,6 @@ namespace Students
                     odsGetOneStudent.TypeName = "Students.JsonStudentDB";
                     break;
             }
-            //if (GridView2.SelectedIndex == -1)
-            //    ViewState["RowIndex"] = 0;
         }
         protected void ddlListDB_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -75,7 +72,6 @@ namespace Students
             odsGetOneStudent.SelectParameters.Add("StudentID", studentID.ToString());
 
             dvGetStudent.Fields.Clear();
-            //dvGetStudent.DataSourceID = "odsGetOneStudent";
             dvGetStudent.AutoGenerateRows = false;
 
             #region создание полей dvGetStudent
@@ -147,42 +143,11 @@ namespace Students
                 HideControls();
             }
             ViewState["RowIndex"] = GridView2.SelectedIndex;
-            //Response.Write("</br>" + GridView2.SelectedIndex);
         }
         protected void btnExportToPdf_Click(object sender, EventArgs e)
         {
             Response.Write("----btnExportToPdf_Click----");
-            int rows = dvGetStudent.Rows.Count;
-            int columns = dvGetStudent.Rows[0].Cells.Count;
-            int pdfTableRows = rows + 3;
-            iTextSharp.text.Table PdfTable = new iTextSharp.text.Table(2, pdfTableRows);
-            PdfTable.BorderWidth = 1;
-            //PdfTable.BorderColor = new Color(0, 0, 255);
-            PdfTable.Cellpadding = 5;
-            PdfTable.Cellspacing = 5;
-            Cell c1 = new Cell("Export Or Create PDF From DetailsView In Asp.Net");
-            c1.Header = true;
-            c1.Colspan = 2;
-            PdfTable.AddCell(c1);
-            Cell c2 = new Cell("By CsharpAspNetArticles.com");
-            c2.Colspan = 2;
-            PdfTable.AddCell(c2);
-            for (int rowCounter = 0; rowCounter < rows; rowCounter++)
-            {
-                for (int columnCounter = 0; columnCounter < columns; columnCounter++)
-                {
-                    string strValue = dvGetStudent.Rows[rowCounter].Cells[columnCounter].Text;
-                    PdfTable.AddCell(strValue);
-                }
-            }
-            Document Doc = new Document();
-            PdfWriter.GetInstance(Doc, Response.OutputStream);
-            Doc.Open();
-            Doc.Add(PdfTable);
-            Doc.Close();
-            Response.ContentType = "application/pdf";
-            Response.AddHeader("content-disposition", "attachment; filename=CsharpAspNetArticles.pdf");
-            Response.End();
+            ExportToPdf.Export(dvGetStudent);
             
         }
         protected void GridView2_RowEditing(object sender, GridViewEditEventArgs e)

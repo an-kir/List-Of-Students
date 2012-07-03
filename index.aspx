@@ -12,19 +12,19 @@
     <asp:Label ID="lblError" runat="server"></asp:Label>
     <asp:Label ID="lblMyHid" runat="server" Visible="False"></asp:Label>
     <script runat="server">
-        protected void odsAllStudents_Filtering(object sender, ObjectDataSourceFilteringEventArgs e)
+    protected void odsAllStudents_Filtering(object sender, ObjectDataSourceFilteringEventArgs e)
     {
-        Response.Write("Filtering:</br>  ");
-        foreach (var c in e.ParameterValues.Keys)
-        {
-            if((e.ParameterValues[c.ToString()])!=null)
-                Response.Write("[" + c.ToString() + "]=" + e.ParameterValues[c.ToString()].ToString() + ";");
-        }
+        //Response.Write("Filtering:</br>  ");
+        //foreach (var c in e.ParameterValues.Keys)
+        //{
+        //    if((e.ParameterValues[c.ToString()])!=null)
+        //        Response.Write("[" + c.ToString() + "]=" + e.ParameterValues[c.ToString()].ToString() + ";");
+        //}
         
-        {
-            if (e.ParameterValues[0] != null)
-                Response.Write("!!!" + e.ParameterValues[0] + "!!!");
-        }
+        //{
+        //    if (e.ParameterValues[0] != null)
+        //        Response.Write("!!!" + e.ParameterValues[0] + "!!!");
+        //}
     }
     </script>
 
@@ -34,22 +34,32 @@
             DeleteMethod="DeleteStudent" 
             InsertMethod="InsertStudent" 
             UpdateMethod="UpdateStudent" 
-            >
+            FilterExpression="FirstName LIKE '{0}%' and SecondName LIKE '{1}%' and ((DateOfBirth>='{2}' and DateOfBirth<='{3}') or DateOfBirth=' ')"
+            OnFiltering="odsAllStudents_Filtering">
+            <filterparameters>
+                <asp:FormParameter name="FirstName"  FormField="txtFilterByFirstName" DefaultValue="*"/>
+                <asp:FormParameter Name="SecondName" FormField="txtFilterBySecondName" DefaultValue="*"/>
+                <asp:FormParameter Name="DateOfBirthFrom" FormField="txtFilterByDateOfBirthFrom" DefaultValue="0" />
+                <asp:FormParameter Name="DateOfBirthTo" FormField="txtFilterByDateOfBirthTo" DefaultValue="9999999999" />
+            </filterparameters>
     </asp:ObjectDataSource>
-        <asp:DropDownList ID="ddlListDB" runat="server" OnSelectedIndexChanged="ddlListDB_SelectedIndexChanged" AutoPostBack="True">
+    <asp:Label ID="lblDataSource" runat="server" Text="источник данных:"></asp:Label>
+    <asp:DropDownList ID="ddlListDB" runat="server" OnSelectedIndexChanged="ddlListDB_SelectedIndexChanged" AutoPostBack="True">
         <asp:ListItem Value="SQL">SQL</asp:ListItem>
         <asp:ListItem Value="XML">XML</asp:ListItem>
         <asp:ListItem Value="JSON">JSON</asp:ListItem>
-        </asp:DropDownList>
+    </asp:DropDownList>
     <asp:ObjectDataSource ID="odsGetOneStudent" runat="server" 
             DataObjectTypeName="Students.StudentDetails" 
             SelectMethod="GetStudent" 
             >
     </asp:ObjectDataSource>
-
+    <br />
     <asp:DetailsView ID="DetailsView2" runat="server" DataSourceID="odsAllStudents" AutoGenerateRows="false"
         DefaultMode="Insert" OnItemInserting="DetailsView2_OnItemInserting" 
             >
+        <FieldHeaderStyle BackColor="#DC143C" Font-Size="Large" Font-Bold="true" ForeColor="White" />
+        <RowStyle BackColor="#FFFBD6" ForeColor="#333333" />
         <Fields>
             <asp:BoundField DataField="StudentID" HeaderText="ID" />
             <asp:BoundField DataField="FirstName" HeaderText="First Name" />
@@ -64,6 +74,7 @@
         </Fields>
     </asp:DetailsView>
 <!-- __________________________________________________________________________________________________________ -->  
+        <br />
         <asp:Label ID="lblFilterBy" runat="server" Text="фильтровать по:"></asp:Label>
         <br />
         <asp:Label ID="lblFilterByFirstName" runat="server" Text="имя"></asp:Label>
@@ -90,7 +101,6 @@
         OnSelectedIndexChanged="GridView2_SelectedIndexChanged"
         OnRowDeleting="GridView2_RowDeleting"
         OnRowUpdated="GridView2_RowUpdated"
-        
    >
         <HeaderStyle BackColor="#990000" Font-Size="Large" Font-Bold="true" ForeColor="White" />
         <RowStyle BackColor="#FFFBD6" ForeColor="#333333" />
@@ -113,10 +123,11 @@
     </div>
     <asp:Button ID="btnExport"  runat="server" onclick="btnExport_Click" Text="Экспорт в Excel" />
     <asp:DetailsView ID="dvGetStudent" runat="server" AutoGenerateRows="false" DataSourceID = "odsGetOneStudent" Visible="false">
+    <FieldHeaderStyle BackColor="#0000CD" Font-Size="Large" Font-Bold="true" ForeColor="White" />
+    <RowStyle BackColor="#AFEEEE" ForeColor="#333333" />
         
     </asp:DetailsView>
     <asp:Button ID="btnExportToPdf"  runat="server" onclick="btnExportToPdf_Click" Text="Экспорт в PDF" Visible="false"/>
-     <asp:PlaceHolder ID="PlaceHolder" runat="server"></asp:PlaceHolder>
     </form>
 </body>
 </html>

@@ -4,3 +4,9 @@ E:\программирование\учебное\Train\Students\Students\obj\D
 E:\программирование\учебное\Train\Students\Students\obj\Debug\Students.dll
 E:\программирование\учебное\Train\Students\Students\obj\Debug\Students.pdb
 E:\программирование\учебное\Train\Students\Students\bin\itextsharp.dll
+C:\Users\Андрей\List-Of-Students\Students\Students\bin\Students.dll
+C:\Users\Андрей\List-Of-Students\Students\Students\bin\Students.pdb
+C:\Users\Андрей\List-Of-Students\Students\Students\bin\itextsharp.dll
+C:\Users\Андрей\List-Of-Students\Students\Students\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Андрей\List-Of-Students\Students\Students\obj\Debug\Students.dll
+C:\Users\Андрей\List-Of-Students\Students\Students\obj\Debug\Students.pdb

@@ -5,6 +5,7 @@ using System.Web;
 using System.Data;
 using System.Xml.Linq;
 using System.IO;
+using System.ComponentModel;
 
 namespace Students
 {
@@ -31,7 +32,9 @@ namespace Students
         }
         public int InsertStudent(StudentDetails stud)
         {
-            int maxId = studentsList.Elements("Student").Max(t => Int32.Parse(t.Element(strStudentID).Value));
+            int maxId=0;
+            if (studentsList.HasElements)
+                maxId = studentsList.Elements("Student").Max(t => Int32.Parse(t.Element(strStudentID).Value));
             XElement track = new XElement("Student",
                 new XElement(strStudentID, ++maxId),
                 new XElement(strFirstName, stud.FirstName),
@@ -75,9 +78,52 @@ namespace Students
         {
             IEnumerable<XElement> match = from student in studentsList.Descendants("Student")
                                           select student;
+            //(new XmlStudentDB()).ExportToJson();
+            //(new XmlStudentDB()).ExportToSql();
+
             DataSet ds = new DataSet();
             ds.ReadXml(new StringReader(new XElement("Student", match).ToString()));
-            return ds;
+            if (ds.Tables.Count != 0)
+                return ds;
+            else
+            {
+                DataTable dataTable = new DataTable();
+                PropertyDescriptorCollection property = TypeDescriptor.GetProperties(typeof(StudentDetails));
+                foreach (PropertyDescriptor prop in property)
+                {
+                    dataTable.Columns.Add(prop.Name, prop.PropertyType);
+                }
+                ds.Tables.Add(dataTable);
+                return ds;
+            }
+        }
+        public void ExportToSql()
+        {
+            IEnumerable<XElement> match = from student in studentsList.Descendants("Student")
+                                          select student;
+
+            List<StudentDetails> list = new List<StudentDetails>();
+            foreach (XElement e in match.ToList())
+            {
+                StudentDetails st = new StudentDetails((int)e.Element(strStudentID), (string)e.Element(strFirstName), (string)e.Element(strSecondName), (string)e.Element(strDateOfBirth), (string)e.Element(strFoto));
+                list.Add(st);
+            }
+            if (list != null)
+                (new SqlStudentDB()).Fill(list);
+        }
+        public void ExportToJson()
+        {
+            IEnumerable<XElement> match = from student in studentsList.Descendants("Student")
+                                          select student;
+
+            List<StudentDetails> list = new List<StudentDetails>();
+            foreach (XElement e in match.ToList())
+            {
+                StudentDetails st = new StudentDetails((int)e.Element(strStudentID), (string)e.Element(strFirstName), (string)e.Element(strSecondName), (string)e.Element(strDateOfBirth), (string)e.Element(strFoto));
+                list.Add(st);
+            }
+            if (list != null)
+                (new JsonStudentDB()).WriteListToJsonFile(list);
         }
         public DataSet GetStudent(int studentID)
         {
@@ -85,9 +131,16 @@ namespace Students
             IEnumerable<XElement> stud = from student in studentsList.Descendants("Student")
                                          where (int)student.Element(strStudentID) == studentID
                                          select student;
+            
             DataSet ds = new DataSet();
             ds.ReadXml(new StringReader(new XElement("Student", stud).ToString()));
-            return ds;
+            if (ds.Tables.Count != 0)
+                return ds;
+            else
+            {
+                ds.Tables.Add(new DataTable());
+                return ds;
+            }
         }
         public DataSet GetStudent()
         {

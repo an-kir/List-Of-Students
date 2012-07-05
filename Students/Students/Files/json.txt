@@ -1,5 +1,10 @@
-{"StudentID":1,"FirstName":"Andrey","SecondName":"Kirillov","DateOfBirth":"12.12.12","Foto":""}
-{"StudentID":2,"FirstName":"Vitya","SecondName":"Pavlov","DateOfBirth":"12.12.12","Foto":""}
-{"StudentID":3,"FirstName":"Vitya","SecondName":"Pavlov","DateOfBirth":"12.12.12","Foto":""}
-{"StudentID":4,"FirstName":"boks","SecondName":"bbb","DateOfBirth":"12.12.12","Foto":""}
-{"StudentID":5,"FirstName":"sdfgsf","SecondName":"sfsf","DateOfBirth":"2322","Foto":"\Foto\5.jpg"}
+{"StudentID":1,"FirstName":"Вася","SecondName":"Петросян","DateOfBirth":"12.12.1988","Foto":"\\Foto\\1.jpg"}
+{"StudentID":2,"FirstName":"Коля","SecondName":"Миронов","DateOfBirth":"01.10.1990","Foto":"\\Foto\\2.jpg"}
+{"StudentID":3,"FirstName":"Петр","SecondName":"Морской","DateOfBirth":"3.07.1991","Foto":"\\Foto\\3.jpg"}
+{"StudentID":4,"FirstName":"Андрей","SecondName":"Ялов","DateOfBirth":"3.10.1987","Foto":"\\Foto\\4.jpg"}
+{"StudentID":5,"FirstName":"Василий","SecondName":"Пономаренко","DateOfBirth":"10.11.1993","Foto":"\\Foto\\5.jpg"}
+{"StudentID":6,"FirstName":"Наташа","SecondName":"Мурка","DateOfBirth":"2.09.1889","Foto":"\\Foto\\6.jpg"}
+{"StudentID":7,"FirstName":"Ирина","SecondName":"Кузьма","DateOfBirth":"25.11.1991","Foto":"\\Foto\\7.jpg"}
+{"StudentID":8,"FirstName":"Настя","SecondName":"Почка","DateOfBirth":"23.11.1994","Foto":"\\Foto\\8.jpg"}
+{"StudentID":9,"FirstName":"Андрей","SecondName":"Мызь","DateOfBirth":"13.05.1992","Foto":"\\Foto\\9.jpg"}
+{"StudentID":10,"FirstName":"Анна","SecondName":"Тишина","DateOfBirth":"24.03.1992","Foto":"\\Foto\\10.jpg"}

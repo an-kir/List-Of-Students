@@ -14,7 +14,7 @@ namespace Students
         string path = "";
         public JsonStudentDB()
         {
-            path = System.AppDomain.CurrentDomain.BaseDirectory + "Files\\Json2.txt";
+            path = System.AppDomain.CurrentDomain.BaseDirectory + "Files\\Json.txt";
         }
         public JsonStudentDB(string file)
         {
@@ -163,10 +163,23 @@ namespace Students
             JavaScriptSerializer js = new JavaScriptSerializer();
             foreach (StudentDetails st in list)
             {
-
                 sw.WriteLine(js.Serialize(st));
             }
             sw.Close();
+        }
+        public void WriteListToJsonFile(List<StudentDetails> list)
+        {
+            StreamWriter sw = new StreamWriter(path);
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            foreach (StudentDetails st in list)
+            {
+                sw.WriteLine(js.Serialize(st));
+            }
+            sw.Close();
+        }
+        public void WriteTOJsonFile(DataSet ds)
+        {
+            //ds.w
         }
     }
 }

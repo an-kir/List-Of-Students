@@ -1,3 +1,0 @@
-<asp:FormParameter Name="SecondName" FormField="txtFilterBySecondName" />
-                <asp:FormParameter Name="DateOfBirthFrom" FormField="txtFilterByDateOfBirthFrom" />
-                <asp:FormParameter Name="DateOfBirthTo" FormField="txtFilterByDateOfBirthTo" />

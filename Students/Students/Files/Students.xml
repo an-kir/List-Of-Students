@@ -1,101 +1,73 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <NewDataSet>
   <Student>
+    <StudentID>1</StudentID>
+    <FirstName>Вася</FirstName>
+    <SecondName>Петросян</SecondName>
+    <DateOfBirth>12.12.1988</DateOfBirth>
+    <Foto>\Foto\1.jpg</Foto>
+  </Student>
+  <Student>
     <StudentID>2</StudentID>
-    <FirstName>Ваcя      </FirstName>
-    <SecondName>Петров    </SecondName>
-    <DateOfBirth xml:space="preserve">          </DateOfBirth>
-    <Foto>\Foto\2.jpg    </Foto>
+    <FirstName>Коля</FirstName>
+    <SecondName>Миронов</SecondName>
+    <DateOfBirth>01.10.1990</DateOfBirth>
+    <Foto>\Foto\2.jpg</Foto>
+  </Student>
+  <Student>
+    <StudentID>3</StudentID>
+    <FirstName>Петр</FirstName>
+    <SecondName>Морской</SecondName>
+    <DateOfBirth>3.07.1991</DateOfBirth>
+    <Foto>\Foto\3.jpg</Foto>
+  </Student>
+  <Student>
+    <StudentID>4</StudentID>
+    <FirstName>Андрей</FirstName>
+    <SecondName>Ялов</SecondName>
+    <DateOfBirth>3.10.1987</DateOfBirth>
+    <Foto>\Foto\4.jpg</Foto>
+  </Student>
+  <Student>
+    <StudentID>5</StudentID>
+    <FirstName>Василий</FirstName>
+    <SecondName>Пономаренко</SecondName>
+    <DateOfBirth>10.11.1993</DateOfBirth>
+    <Foto>\Foto\5.jpg</Foto>
   </Student>
   <Student>
     <StudentID>6</StudentID>
-    <FirstName>Николай   </FirstName>
-    <SecondName>Иванченко </SecondName>
-    <DateOfBirth>1989-03-20</DateOfBirth>
-    <Foto>\Foto\6.jpg    </Foto>
+    <FirstName>Наташа</FirstName>
+    <SecondName>Мурка</SecondName>
+    <DateOfBirth>2.09.1889</DateOfBirth>
+    <Foto>\Foto\6.jpg</Foto>
   </Student>
   <Student>
     <StudentID>7</StudentID>
-    <FirstName>Николай   </FirstName>
-    <SecondName>Петренко  </SecondName>
-    <DateOfBirth>1989-07-20</DateOfBirth>
-    <Foto>\Foto\7.jpg    </Foto>
+    <FirstName>Ирина</FirstName>
+    <SecondName>Кузьма</SecondName>
+    <DateOfBirth>25.11.1991</DateOfBirth>
+    <Foto>\Foto\7.jpg</Foto>
   </Student>
   <Student>
-    <StudentID>15</StudentID>
-    <FirstName>фвыа      </FirstName>
-    <SecondName>ыаыв      </SecondName>
-    <DateOfBirth xml:space="preserve">          </DateOfBirth>
-    <Foto>\Foto\15.jpg   </Foto>
+    <StudentID>8</StudentID>
+    <FirstName>Настя</FirstName>
+    <SecondName>Почка</SecondName>
+    <DateOfBirth>23.11.1994</DateOfBirth>
+    <Foto>\Foto\8.jpg</Foto>
   </Student>
   <Student>
-    <StudentID>40</StudentID>
-    <FirstName>123123123 </FirstName>
-    <SecondName>123123132 </SecondName>
-    <DateOfBirth xml:space="preserve">          </DateOfBirth>
-    <Foto>\Foto\40.jpg   </Foto>
+    <StudentID>9</StudentID>
+    <FirstName>Андрей</FirstName>
+    <SecondName>Мызь</SecondName>
+    <DateOfBirth>13.05.1992</DateOfBirth>
+    <Foto>\Foto\9.jpg</Foto>
   </Student>
   <Student>
-    <StudentID>44</StudentID>
-    <FirstName>dsfsddf   </FirstName>
-    <SecondName>sdfsdf    </SecondName>
-    <DateOfBirth>2323      </DateOfBirth>
-    <Foto>\Foto\44.jpg   </Foto>
-  </Student>
-  <Student>
-    <StudentID>47</StudentID>
-    <FirstName>122       </FirstName>
-    <SecondName>1212      </SecondName>
-    <DateOfBirth xml:space="preserve">          </DateOfBirth>
-    <Foto>\Foto\47.jpg   </Foto>
-  </Student>
-  <Student>
-    <StudentID>48</StudentID>
-    <FirstName>13123     </FirstName>
-    <SecondName>12312312  </SecondName>
-    <DateOfBirth>3223      </DateOfBirth>
-    <Foto>\Foto\48.jpg   </Foto>
-  </Student>
-  <Student>
-    <StudentID>49</StudentID>
-    <FirstName>121       </FirstName>
-    <SecondName>12312     </SecondName>
-    <DateOfBirth>13123     </DateOfBirth>
-    <Foto>\Foto\49.jpg   </Foto>
-  </Student>
-  <Student>
-    <StudentID>77</StudentID>
-    <FirstName>ыва       </FirstName>
-    <SecondName>ыавы      </SecondName>
-    <DateOfBirth>выа       </DateOfBirth>
-    <Foto>\Foto\77.jpg   </Foto>
-  </Student>
-  <Student>
-    <StudentID>78</StudentID>
-    <FirstName>ыва       </FirstName>
-    <SecondName>ывав      </SecondName>
-    <DateOfBirth>123123123 </DateOfBirth>
-    <Foto>\Foto\78.jpg   </Foto>
-  </Student>
-  <Student>
-    <StudentID>79</StudentID>
-    <FirstName>Андрей    </FirstName>
-    <SecondName>Кавасканди</SecondName>
-    <DateOfBirth>12.12.1978</DateOfBirth>
-    <Foto>\Foto\79.jpg   </Foto>
-  </Student>
-  <Student>
-    <StudentID>80</StudentID>
-    <FirstName>Петр      </FirstName>
-    <SecondName>Туча      </SecondName>
-    <DateOfBirth xml:space="preserve">          </DateOfBirth>
-    <Foto xml:space="preserve">               </Foto>
-  </Student>
-  <Student>
-    <StudentID>81</StudentID>
-    <FirstName>fdsfdsfsd</FirstName>
-    <SecondName>sdfsdfsdf</SecondName>
-    <DateOfBirth>2323223</DateOfBirth>
-    <Foto></Foto>
+    <StudentID>10</StudentID>
+    <FirstName>Анна</FirstName>
+    <SecondName>Тишина</SecondName>
+    <DateOfBirth>24.03.1992</DateOfBirth>
+    <Foto>\Foto\10.jpg</Foto>
   </Student>
 </NewDataSet>

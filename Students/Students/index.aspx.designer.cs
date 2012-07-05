@@ -76,13 +76,13 @@ namespace Students {
         protected global::System.Web.UI.WebControls.ObjectDataSource odsGetOneStudent;
         
         /// <summary>
-        /// DetailsView2 элемент управления.
+        /// dvInsertStudent элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DetailsView DetailsView2;
+        protected global::System.Web.UI.WebControls.DetailsView dvInsertStudent;
         
         /// <summary>
         /// lblFilterBy элемент управления.
@@ -130,58 +130,13 @@ namespace Students {
         protected global::System.Web.UI.WebControls.TextBox txtFilterBySecondName;
         
         /// <summary>
-        /// lblFilterByDateOfBirth элемент управления.
+        /// gvAllStudents элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFilterByDateOfBirth;
-        
-        /// <summary>
-        /// lblFilterByDateOfBirthFrom элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFilterByDateOfBirthFrom;
-        
-        /// <summary>
-        /// txtFilterByDateOfBirthFrom элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFilterByDateOfBirthFrom;
-        
-        /// <summary>
-        /// lblFilterByDateOfBirthTo элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFilterByDateOfBirthTo;
-        
-        /// <summary>
-        /// txtFilterByDateOfBirthTo элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFilterByDateOfBirthTo;
-        
-        /// <summary>
-        /// GridView2 элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView2;
+        protected global::System.Web.UI.WebControls.GridView gvAllStudents;
         
         /// <summary>
         /// fuFoto элемент управления.
@@ -209,6 +164,15 @@ namespace Students {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DetailsView dvGetStudent;
+        
+        /// <summary>
+        /// imgShow элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgShow;
         
         /// <summary>
         /// btnExportToPdf элемент управления.

@@ -11,12 +11,14 @@ using System.IO;
 using System.Web.UI.HtmlControls;
 using System.Xml.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.text.html;
 using iTextSharp.text.html.simpleparser;
 using iTextSharp;
 using System.Web.Script.Serialization;
+using System.ComponentModel;
 
 namespace Students
 {
@@ -24,7 +26,16 @@ namespace Students
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+                ViewState["RowIndex"] = -1;
             //string typeOfDB = WebConfigurationManager.AppSettings["keyDB"];
+
+            //DateTime dt = DateTime.Now;
+            
+            //string str = new String("{0,-35:D}", dt);
+            //lblMyHid.Visible = true;
+            //lblMyHid.Text = String.Format("{0:d MM yyyy}", dt);
+            //Response.Write(dt.Year + "-" + dt.Month + "-" + dt.Day);
             string typeOfDB = ddlListDB.SelectedValue.ToString();
             switch (typeOfDB.ToUpper())
             {
@@ -41,44 +52,93 @@ namespace Students
                     odsGetOneStudent.TypeName = "Students.JsonStudentDB";
                     break;
             }
+
         }
         protected void ddlListDB_SelectedIndexChanged(object sender, EventArgs e)
         {
             HideControls();
-            GridView2.SelectedIndex = -1;
-            GridView2.DataBind();
+            gvAllStudents.SelectedIndex = -1;
+            gvAllStudents.DataBind();
         }
-        protected void DetailsView2_OnItemInserting(object sender, DetailsViewInsertEventArgs e)
+        protected void dvInsertStudent_OnItemInserting(object sender, DetailsViewInsertEventArgs e)
         {
-            FileUpload fu = (FileUpload)DetailsView2.FindControl("uploadFoto");
-            if (fu.PostedFile.ContentLength != 0)
+            if (ValidateOnInsertingDetailsView(e))
             {
-                string path = Server.MapPath(@"\Foto");
-                path += "\\Temp.jpg";
-                fu.PostedFile.SaveAs(path);
+                FileUpload fu = (FileUpload)dvInsertStudent.FindControl("uploadFoto");
+                if (fu.PostedFile.ContentLength != 0)
+                {
+                    string path = Server.MapPath(@"\Foto");
+                    path += "\\Temp.jpg";
+                    fu.PostedFile.SaveAs(path);
+                }
             }
             //ClientScript.RegisterStartupScript(
         }
-
-
-        protected void GridView2_SelectedIndexChanged(object sender, EventArgs e)
+        private bool ValidateOnInsertingDetailsView(DetailsViewInsertEventArgs e)
         {
-
+            Label lblEr = new Label();
+            lblEr.ForeColor = System.Drawing.Color.Red;
+            
+            Regex regName = new Regex("[^a-zA-Zа-яА-Я]");
+            Regex regDate = new Regex("[^0-9./-]");
+            if (e.Values[0] == null || e.Values[0].ToString() == "")
+            {
+                e.Cancel = true;
+                lblEr.Text += "Вы не ввели имя студента. Введите имя;</br>";
+            }
+            else
+                if (regName.IsMatch(e.Values[0].ToString()))
+                {
+                    e.Cancel = true;
+                    lblEr.Text += "Имя может содержать только буквы русского и латинского алфавитов;</br>";
+                }
+            if (e.Values[1] == null || e.Values[1].ToString() == "")
+            {
+                e.Cancel = true;
+                lblEr.Text += "Вы не ввели фамилию студента. Введите фамилию;</br>";
+            }
+            else
+                if (regName.IsMatch(e.Values[1].ToString()))
+                {
+                    e.Cancel = true;
+                    lblEr.Text += "Фамилия студента может содержать только буквы русского и латинского алфавитов;</br>";
+                }
+            if (e.Values[2] != null)
+                if (regDate.IsMatch(e.Values[2].ToString()))
+                {
+                    e.Cancel = true;
+                    lblEr.Text += @"Дата рождения может состоять только из цифр и знаков '-', '/' , '.'";
+                    lblEr.Text += "</br>";
+                }
+            if (lblEr.Text != "")
+            {
+                form1.Controls.AddAt(form1.Controls.IndexOf(dvInsertStudent) + 1, lblEr);
+                return false;
+            }
+            else
+                return true;
+        }
+        
+        protected void gvAllStudents_SelectedIndexChanged(object sender, EventArgs e)
+        {
             dvGetStudent.Visible = true;
+            dvGetStudent.DataBind();
             btnExportToPdf.Visible = true;
-            string id = (string)GridView2.SelectedDataKey.Values["StudentID"].ToString();
+            string id = (string)gvAllStudents.SelectedDataKey.Values["StudentID"].ToString();
             int studentID = Convert.ToInt32(id);
             odsGetOneStudent.SelectParameters.Clear();
             odsGetOneStudent.SelectParameters.Add("StudentID", studentID.ToString());
 
-            dvGetStudent.Fields.Clear();
+            int numberOfFiels = dvInsertStudent.Fields.Count - 1;
+            if (dvGetStudent.Fields.Count == numberOfFiels)
+                dvGetStudent.Fields.RemoveAt(0);
+            //dvGetStudent.Fields.Clear();
             dvGetStudent.AutoGenerateRows = false;
 
-            #region создание полей dvGetStudent
             string fotoUrlFromDB = "";
             try
             {
-                fotoUrlFromDB = (string)GridView2.SelectedDataKey.Values["Foto"];
+                fotoUrlFromDB = (string)gvAllStudents.SelectedDataKey.Values["Foto"];
             }
             catch
             {
@@ -91,44 +151,16 @@ namespace Students
                 {
                     TemplateField foto = new TemplateField();
                     foto.ItemTemplate = new ShowFoto(fotoUrlFromDB);
-                    dvGetStudent.Fields.Add(foto);
+                    dvGetStudent.Fields.Insert(0, foto);
                 }
             }
-            BoundField firstName = new BoundField();
-            firstName.DataField = "FirstName";
-            firstName.HeaderText = "First Name";
-            dvGetStudent.Fields.Add(firstName);
-            BoundField secondName = new BoundField();
-            secondName.DataField = "SecondName";
-            secondName.HeaderText = "Second Name";
-            dvGetStudent.Fields.Add(secondName);
-            BoundField dateOfBirth = new BoundField();
-            dateOfBirth.DataField = "DateOfBirth";
-            dateOfBirth.HeaderText = "Date Of Birth";
-            dvGetStudent.Fields.Add(dateOfBirth);
-            #endregion
-
-            #region мусор
-            //form1.Controls.Add(dv);
-            //dvGetStudent.DataBind();
-
-            //доделать экспорт в pdf без клика по кнопке
-            //CreateChildControls();
-
-            //Button btnExportToPdf = new Button();
-            //btnExportToPdf.Text = "Export To PDF";
-            //btnExportToPdf.Click += new EventHandler(btnExportToPdf_Click);
-            //btnExportToPdf.Attributes["runat"] = "server";
-            ////btnExportToPdf.Attributes["onclick"] = "btnExportToPdf_Click";
-            //form1.Controls.Add(btnExportToPdf);
-            ////PlaceHolder.Controls.Add(btnExport);
-            ////ViewState["btnExportToPdf"] = btnExportToPdf;
-            ////if(btnExport.Click)
-
-            //btnExport_Click(btnExport, null);
-            #endregion
 
             fuFoto.Visible = false;
+            DeselectRow();
+        }
+        private void DeselectRow()
+        {
+
             int prevIndex = 0;
             try
             {
@@ -137,54 +169,129 @@ namespace Students
             catch
             {
             }
-            if (prevIndex == GridView2.SelectedIndex)
+            if (prevIndex == gvAllStudents.SelectedIndex)
             {
-                GridView2.SelectedIndex = -1;
+                gvAllStudents.SelectedIndex = -1;
                 HideControls();
             }
-            ViewState["RowIndex"] = GridView2.SelectedIndex;
+
+            ViewState["RowIndex"] = gvAllStudents.SelectedIndex;
         }
         protected void btnExportToPdf_Click(object sender, EventArgs e)
         {
-            Response.Write("----btnExportToPdf_Click----");
-            ExportToPdf.Export(dvGetStudent);
+            //Response.Write("----btnExportToPdf_Click----");
+            string fotoUrlFromDB = "";
+            try
+            {
+                fotoUrlFromDB = (string)gvAllStudents.SelectedDataKey.Values["Foto"];
+            }
+            catch
+            {
+                //попадает в catch, если foto = null
+            }
+            if (fotoUrlFromDB != "")
+            {
+                fotoUrlFromDB = System.AppDomain.CurrentDomain.BaseDirectory + fotoUrlFromDB.Trim();
+                if (File.Exists(fotoUrlFromDB))
+                {
+                    ExportToPdf.Export(dvGetStudent, fotoUrlFromDB, "StudentsPDF");
+                }
+            }
+            else
+                ExportToPdf.Export(dvGetStudent, "StudentsPDF");
             
         }
-        protected void GridView2_RowEditing(object sender, GridViewEditEventArgs e)
+        protected void gvAllStudents_RowEditing(object sender, GridViewEditEventArgs e)
         {
+            
             HideControls();
             fuFoto.Visible = true;
-            GridView2.SelectedIndex = e.NewEditIndex;
+            gvAllStudents.SelectedIndex = e.NewEditIndex;
         }
-        protected void GridView2_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        protected void gvAllStudents_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            if (fuFoto.PostedFile.ContentLength != 0)
+            if (ValidateOnUpdateGridView(e))
             {
-                string path = Server.MapPath(@"\Foto");
-                path += "\\Temp.jpg";
-                fuFoto.PostedFile.SaveAs(path);
+                if (fuFoto.PostedFile != null && fuFoto.PostedFile.ContentLength != 0)
+                {
+                    string path = Server.MapPath(@"\Foto");
+                    path += "\\Temp.jpg";
+                    fuFoto.PostedFile.SaveAs(path);
+                }
             }
             fuFoto.Visible = false;
         }
-        protected void GridView2_RowUpdated(object sender, EventArgs e)
+        private bool ValidateOnUpdateGridView(GridViewUpdateEventArgs e)
         {
-            GridView2.SelectedIndex = -1;
+            Label lblEr = new Label();
+            lblEr.ForeColor = System.Drawing.Color.Red;
+            lblEr.Text = "";
+
+            for (int i = 0; i <= 2; i++)
+            {
+                if (e.NewValues[i] != null)
+                    e.NewValues[i] = e.NewValues[i].ToString().Trim();
+            }
+
+            Regex regName = new Regex("[^a-zA-Zа-яА-Я]");
+            Regex regDate = new Regex("[^0-9./-]");
+            if (e.NewValues[0] == null || e.NewValues[0].ToString() == "")
+            {
+                e.Cancel = true;
+                lblEr.Text += "Вы не ввели имя студента. Введите имя;</br>";
+            }
+            else
+                if (regName.IsMatch(e.NewValues[0].ToString()))
+                {
+                    e.Cancel = true;
+                    lblEr.Text += "Имя может содержать только буквы русского и латинского алфавитов;</br>";
+                }
+            if (e.NewValues[1] == null || e.NewValues[1].ToString() == "")
+            {
+                e.Cancel = true;
+                lblEr.Text += "Вы не ввели фамилию студента. Введите фамилию;</br>";
+            }
+            else
+                if (regName.IsMatch(e.NewValues[1].ToString()))
+                {
+                    e.Cancel = true;
+                    lblEr.Text += "Фамилия студента может содержать только буквы русского и латинского алфавитов;</br>";
+                }
+            if (e.NewValues[2] != null)
+                if (regDate.IsMatch(e.NewValues[2].ToString()))
+                {
+                    e.Cancel = true;
+                    lblEr.Text += @"Дата рождения может состоять только из цифр и знаков '-', '/' , '.'";
+                    lblEr.Text += "</br>";
+                }
+            if (lblEr.Text != "")
+            {
+                form1.Controls.AddAt(form1.Controls.IndexOf(gvAllStudents) - 1, lblEr);
+                return false;
+            }
+            else 
+                return true;
         }
-        protected void GridView2_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        protected void gvAllStudents_RowUpdated(object sender, EventArgs e)
         {
-            GridView2.SelectedIndex = -1;
+            gvAllStudents.SelectedIndex = -1;
+        }
+        protected void gvAllStudents_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvAllStudents.SelectedIndex = -1;
             fuFoto.Visible = false;
         }
-        protected void GridView2_RowDeleting(object sebder, EventArgs e)
+        protected void gvAllStudents_RowDeleting(object sebder, EventArgs e)
         {
             HideControls();
+            
             // добавить подтверждение удаления
         }
         protected void btnExport_Click(object sender, EventArgs e)
         {
             HideControls();
-            GridView2.SelectedIndex = -1;
-            GridView gv = GridView2;
+            gvAllStudents.SelectedIndex = -1;
+            GridView gv = gvAllStudents;
             gv.Columns[0].Visible = false;
             gv.Columns[1].Visible = false;
             gv.Columns[2].Visible = false;

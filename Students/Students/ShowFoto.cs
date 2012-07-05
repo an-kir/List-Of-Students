@@ -27,6 +27,7 @@ namespace Students
             if (fotoUrl != "")
             {
                 Image img = new Image();
+                img.ID = "foto";
                 img.ImageUrl = fotoUrl;
                 img.Width = 200;
                 c.Controls.Add(img);

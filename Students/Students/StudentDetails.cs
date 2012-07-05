@@ -40,19 +40,20 @@ namespace Students
         public StudentDetails()
         {
         }
-        public StudentDetails(int studentID, string firstName, string secondName, string dateOfBirth)
+        public StudentDetails(int studentID, string firstName, string secondName, string dateOfBirth,string foto)
         {
             StudentID = studentID;
             FirstName = firstName;
             SecondName = secondName;
             DateOfBirth = dateOfBirth;
+            Foto = foto;
         }
         private string Fill(string value)
         {
             if (value != null)
                 return value;
             else
-                return "NoElement";
+                return "";
         }
     }
 }

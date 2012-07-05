@@ -19,6 +19,7 @@ namespace Students
         {
             connectionString = WebConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
             con = new SqlConnection(connectionString);
+            
         }
         public SqlStudentDB(string connectionString)
         {
@@ -135,6 +136,30 @@ namespace Students
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+        public void Fill(List<StudentDetails> list)
+        {
+            string sql = "Delete Student";
+            con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            using (con)
+            {
+                con.Open();
+                int numAff = cmd.ExecuteNonQuery();
+            }
+            con = new SqlConnection(connectionString);
+            int number;
+            using (con)
+            {
+                con.Open();
+                foreach (StudentDetails stud in list)
+                {
+                    string sqlins = "Insert Into Student (FirstName,SecondName,DateOfBirth,Foto) Values ('" + stud.FirstName + "','" + stud.SecondName + "','" + stud.DateOfBirth + "','" + stud.Foto + "')";
+                    SqlCommand cmdins = new SqlCommand(sqlins, con);
+                    number = cmdins.ExecuteNonQuery();
+                }
+            }
+
         }
     }
 }

@@ -108,11 +108,11 @@
             <asp:CommandField ShowEditButton="true" ButtonType="Button" EditText="Edit" />
             <asp:CommandField ShowDeleteButton="true" ButtonType="Button" DeleteText="удалить" />
             <asp:CommandField ShowSelectButton="true" Visible="true" ButtonType="Button" SelectText="выбрать" />
-            <asp:BoundField Visible="true" ReadOnly="true" DataField="StudentID" HeaderText="ID"/>
+            <asp:BoundField Visible="false" ReadOnly="true" DataField="StudentID" HeaderText="ID"/>
             <asp:BoundField DataField="FirstName" HeaderText="First Name" SortExpression="FirstName"/>
             <asp:BoundField DataField="SecondName" HeaderText="Second Name" SortExpression="SecondName"/>
             <asp:BoundField DataField="DateOfBirth" HeaderText="Date Of Birth" SortExpression="DateOfBirth" DataFormatString="{0:d}" />
-            <asp:BoundField Visible="true" DataField="Foto" HeaderText="Foto" />
+            <asp:BoundField Visible="false" DataField="Foto" HeaderText="Foto" />
         </Columns>
   </asp:GridView>
   </div>

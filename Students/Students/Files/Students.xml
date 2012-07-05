@@ -70,4 +70,11 @@
     <DateOfBirth>24.03.1992</DateOfBirth>
     <Foto>\Foto\10.jpg</Foto>
   </Student>
+  <Student>
+    <StudentID>11</StudentID>
+    <FirstName>Юра</FirstName>
+    <SecondName>Покась</SecondName>
+    <DateOfBirth>13.04.1994</DateOfBirth>
+    <Foto>\Foto\11.jpg</Foto>
+  </Student>
 </NewDataSet>
